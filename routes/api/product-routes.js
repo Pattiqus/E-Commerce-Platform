@@ -38,20 +38,16 @@ router.get('/:id', async (req, res) => {
   };
 });
 
-// create new product
+// # POST: Route for /api/product
 router.post('/', async (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
-  Product.create(req.body)
-    .then((product) => {
+  Product.create({
+    product_name: req.body.product_name,
+    price: req.body.price,
+    stock: req.body.stock,
+    tagIds: req.body.tag_id,
+  }) .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
-      if (req.body.tagIds.length) {
+      if (req.body.tagIds && req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
             product_id: product.id,
@@ -60,7 +56,6 @@ router.post('/', async (req, res) => {
         });
         return ProductTag.bulkCreate(productTagIdArr);
       }
-      // if no product tags, just respond
       res.status(200).json(product);
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
@@ -69,10 +64,9 @@ router.post('/', async (req, res) => {
       res.status(400).json(err);
     });
 });
-
-// update product
+// # PUT: Route for /api/product:id
 router.put('/:id', (req, res) => {
-  // update product data
+  // update product data by searching for it's id
   Product.update(req.body, {
     where: {
       id: req.params.id,
@@ -80,9 +74,11 @@ router.put('/:id', (req, res) => {
   })
     .then((product) => {
       // find all associated tags from ProductTag
+
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
     .then((productTags) => {
+      if (req.body.tagIds && req.body.tagIds.length) {
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
       // create filtered list of new tag_ids
@@ -104,16 +100,34 @@ router.put('/:id', (req, res) => {
         ProductTag.destroy({ where: { id: productTagsToRemove } }),
         ProductTag.bulkCreate(newProductTags),
       ]);
+    }
+      res.status(200).json(productTags)
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    
+    .then((updatedProductTags) => res.status(200).json(updatedProductTags))
     .catch((err) => {
       // console.log(err);
-      res.status(400).json(err);
+      res.status(500).json(err);
     });
 });
 
-router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
+// # DELETE: Route for '/api/product/id'
+router.delete('/:id', async (req, res) => {
+  try {
+    const deleteProductData = await Product.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+// # CONFIRM: If tag id exists
+    if (!deleteProductData) {
+      res.status(400).json(({ message: 'No product found with that ID!'}));
+      return;
+    }
+    res.status(200).json(deleteProductData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

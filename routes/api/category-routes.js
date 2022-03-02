@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// # POST: Create new category
+// # POST: route for '/api/categories/' Creates new category
 router.post('/', async (req, res) => {
   try {
     const newCategoryData = await Category.create(
@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// # PUT: Update an existing category based on its ID
+// # PUT: route for '/api/categories/' Update an existing category based on its ID
 router.put('/:id', async (req, res) => {
   try {
     const updateCategory = await Category.update(req.body, {
@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
       },
     })
     if (!updateCategory) {
-      res.status(400).json({ message: 'No category found with this ID!'});
+      res.status(404).json({ message: 'No category found with this ID!'});
       return;
     }
     res.status(200).json(updateCategory);
@@ -63,7 +63,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// # Delete: remove a category based on its ID
+// # DELETE: remove a category based on its ID
 router.delete('/:id',async (req, res) => {
   try {
     const deleteCategory = await Category.destroy({
