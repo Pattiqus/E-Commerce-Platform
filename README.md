@@ -27,13 +27,11 @@ The following dependencies are necessary to run this application:
 - To run this application effectively, please have Node.js & mySQL installed on your computer, other required modules are bundled in the package.json file provided, by running “npm install” from the command prompt, these modules will be installed.
 - Have your mySQL password on hand. To avoid any potential data breaches and security risks, ensure that the ```.gitignore``` file includes the ```.env``` Environment file as to not upload your sensitive information. Create a ```.env``` file with the below:
 
-```DB_NAME = ecommerce_db```
-```DB_USER = root```
-```DB_PASSWORD = yourPassword```
+```DB_NAME = ecommerce_db DB_USER = root DB_PASSWORD = yourPassword```
 
 - yourPassword is the password which you have set for as the root user of mySQL on your local comptuter. 
 - locate to ```/db``` and run the following command in your terminal ```mysql -u root -p```, you will then be prompted for you password.
-- Type ```source schema.sql```, this will pre populate your DB with the required rows and columns. Then type ```quit`` to return to the terminal.
+- Type ```source schema.sql```, this will pre populate your DB with the required rows and columns. Then type ```quit``` to return to the terminal.
 - Navigate to your root repository and run ```npm start```.
 
 # Usage
