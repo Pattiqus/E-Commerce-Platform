@@ -27,7 +27,9 @@ The following dependencies are necessary to run this application:
 - To run this application effectively, please have Node.js & mySQL installed on your computer, other required modules are bundled in the package.json file provided, by running “npm install” from the command prompt, these modules will be installed.
 - Have your mySQL password on hand. To avoid any potential data breaches and security risks, ensure that the ```.gitignore``` file includes the ```.env``` Environment file as to not upload your sensitive information. Create a ```.env``` file with the below:
 
-```DB_NAME = ecommerce_db DB_USER = root DB_PASSWORD = yourPassword```
+  ```DB_NAME = ecommerce_db ```<br>
+  ```DB_USER = root```<br>
+  ```DB_PASSWORD = yourPassword```
 
 - yourPassword is the password which you have set for as the root user of mySQL on your local comptuter. 
 - locate to ```/db``` and run the following command in your terminal ```mysql -u root -p```, you will then be prompted for you password.
@@ -38,7 +40,7 @@ The following dependencies are necessary to run this application:
 In order to use this application please follow these instructions: 
 This application does not have a dedicated front end to to interaction will occur through an API client such as```Insomnia``` or ```Postman```.
 ## Demonstration Video
-- [Click-for-Demo-Video](https://drive.google.com/file/d/1ZeVpMDLesnr5SW0MvGKS088lTCVfnk9o/view?usp=sharing)
+- [Click-for-Demo-Video](https://drive.google.com/file/d/1MF1w6C6k_MvuRMcKsz30bup-77MAhgJ1/view?usp=sharing)
 # License
 This project is licensed under:
 - [MIT](https://opensource.org/licenses/MIT)
@@ -51,13 +53,6 @@ Pat Brown (Pattiqus)
 ```
 # Tests
 This application was not developed using a Test driven environment.
-
-# Screenshots
-- [Main-menu](./assets/images/mainMenu.PNG)
-- [Main-menu-2](./assets/images/mainMenu2.PNG)
-- [Sample-1](./assets/images/example1.PNG)
-- [Sample-2](./assets/images/example2.PNG)
-
 
 # Questions
 If you have any qestions regrading the repository or the project please contact: <ul><li>GitHub:  <a href=https://github.com/pattiqus>pattiqus</a></li> <li>Email: <a href=mailto:Patticus.tv@gmail.com>Patticus.tv@gmail.com</a></li><li>LinkedIn: <a href=https://www.linkedin.com/in/patrick-brown-52553410a>Patrick Brown</a></li></ul>

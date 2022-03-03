@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
       },
     })
     if (!updateTag) {
-      res.statis(404).json({ message: 'No tag fouund with this ID!'})
+      res.status(404).json({ message: 'No tag fouund with this ID!'})
       return;
     }
     res.status(200).json(updateTag);
@@ -72,6 +72,7 @@ router.delete('/:id', async (req, res) => {
     });
     if (!deleteTag) {
       res.status(404).json({ message: 'No tag found with that ID!'});
+      return;
     }
     res.status(200).json(deleteTag);
   } catch (err) {
